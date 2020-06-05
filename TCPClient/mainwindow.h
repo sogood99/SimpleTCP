@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QTextEdit>
 #include <QPlainTextEdit>
+#include <QNetworkInterface>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

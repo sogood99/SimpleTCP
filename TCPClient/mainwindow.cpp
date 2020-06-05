@@ -39,6 +39,8 @@ MainWindow::~MainWindow()
 {
     if (socket->state() == QTcpSocket::ConnectedState){
         socket->disconnectFromHost();
+    }else if (socket->state() == QTcpSocket::ConnectingState){
+        socket->abort();
     }
     socket->close();
     delete ui;
@@ -48,7 +50,13 @@ void MainWindow::connectTry(){
     if (socket->state() == QTcpSocket::ConnectedState){
         socket->disconnectFromHost();
     }else if (socket->state() == QTcpSocket::UnconnectedState){
-        socket->connectToHost("127.0.0.1", quint16(91234));
+//        for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
+//            if (address.protocol() == QAbstractSocket::IPv4Protocol){
+//                 && address != QHostAddress::LocalHost
+//                qDebug() << address.toString();
+                socket->connectToHost(QHostAddress("192.168.0.102"), quint16(int(37479)));
+//            }
+//        }
     }else{
         socket->abort();
     }
